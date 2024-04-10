@@ -1,18 +1,19 @@
 //clase 2
+
 var bloks = [
-  [' ', '1', ' '],
-  ['1', ' ', '1'],
-  [' ', '1', ' ']
+  [' ', '1', '1','1', ' ','1', ' '],
+  ['1', ' ', '1',' ', '1',' ', '1'],
+  [' ', '1', ' ','1', ' ','1', ' ']
 ];
 let fila = 100;
 let columna = 50;
 let bTam = 100;
-let bDistan;
 let blok = [];
-let distan = [];
+let distanX = [];
+let distanY = [];
 
-var posX = 100;
-var posY = 100;
+var posX = 200;
+var posY = 400;
 var velX = 5;
 var velY = 5;
 var dirX = 1;
@@ -21,10 +22,7 @@ var radio = 10;
 
 var posX2 = 300;
 var posY2 = 550;
-let x = 0;
 let tam = 200;
-let tr =tam - (tam / 5);/*le estoy diciendo que me saque el 80 porciento de un numero*/
-
 var borX = 800 - radio;
 var borY = 600 - radio;
 
@@ -37,10 +35,9 @@ function setup() {
   plano();
 }
 
+
 function draw() {
   background(125, 125, 125);
-  let distance = dist(posX, posX, x, x);
-  d = floor(distance);
   //bolita
   fill(0, 250, 0);
   ellipse(posX, posY, radio *2);
@@ -48,7 +45,7 @@ function draw() {
   fill(255, 0, 0);
   rect(posX2, posY2, tam, 30);
 
-  if (mouseIsPressed == true) {velX = 7;  velY = 7;} 
+  if (mouseIsPressed == true) {velX = 10;  velY = 10;} 
   else {velX = 5;  velY = 5;}
 
   //rebotar con las paredes
@@ -57,19 +54,32 @@ function draw() {
   //barra detenerse
 
   //rebotar con la plataforma
-  if (distance <= tr && posY + radio >= posY2) {dirY = dirY * -1;}
-
-  x = posX2 + (tam / 2);
+  if( posY + radio >= posY2){
+  if (posX >= posX2 && posX <= posX2 + tam ) {dirY = dirY * -1;}
+  }
+  
   posX = posX + dirX * velX;
   posY = posY + dirY * velY;
 
   if (izq==true) {posX2 = posX2 - 5;}
   if (der==true) {posX2 = posX2 + 5;}
 
-  text(d, 100, 200);
-
   for (let i = 0; i < blok.length; i++) {
-    blok[i].show();}
+      blok[i].show();
+    //text(distanX[i], 350, 200);
+    //text(distanY[i], 400, 200);
+      if(posY + radio >= distanY[i] && posY + radio <= distanY[i] +50 ){
+        if (posX >= distanX[i] && posX <= distanX[i] + bTam ) {
+          distanX.splice(i,1);/*asignamos el valor X a una variable*/
+          distanY.splice(i,1);/*asignamos el valor Y a una variable*/
+          blok.splice(i,1);  
+          dirY = dirY * -1;
+          }
+        } 
+  }
+    //text(distanX[1], 100, 200);
+    //text(distanY[1], 200, 200);
+
 }
 
 function keyPressed() {
@@ -84,13 +94,14 @@ function keyReleased() {
 
 function plano() {
   for (let c = 0; c < 3; c++) {
-    for (let f = 0; f < 3; f++) {
+    for (let f = 0; f < 6; f++) {
       var lad = bloks[c][f];
       if (lad == '1') {
-        //fill(255,150,20);
-        //rect(fila  ,columna,  100,25);
         let b = new Bloques(fila, columna);
+        distanX.push(b.x);/*asignamos el valor X a una variable*/
+        distanY.push(b.y);/*asignamos el valor Y a una variable*/
         blok.push(b);
+        text(b, 100,200);
       }
       fila = fila + bTam;
     }
@@ -105,17 +116,10 @@ class Bloques {
     this.x = x;
     this.y = y;
     this.r = bTam;
-    this.t =bTam - (bTam / 5);
-  }
-
-  radio(dista) {
-    //if (distance <= this.t && posY + radio >= posY2) {
-    //  dirY = dirY * -1;
-    //}
   }
 
   show() {
     fill(225, 135, 66);
-    rect(this.x, this.y, 100, 25);
+    rect(this.x, this.y, this.r, 25);
   }
 }
