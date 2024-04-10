@@ -1,0 +1,84 @@
+//clase 2
+var posX = 100;
+var posY = 100;
+var velX = 10;
+var velY = 10;
+var dirX = 1;
+var dirY = 1;
+
+var posX2 = 300;
+var posY2 = 550;
+
+var borX = 770;
+var borY = 570;
+
+
+function setup(){
+ createCanvas(800,600); 
+ time = millis();
+}
+
+function draw(){
+  background(125,125,125);
+  let x = posX2 + 90;
+  
+  let distance = dist(posX,posX,x,x);
+  let distance2 = dist(posX,posY,posX2,posY2);
+   d = floor(distance);
+ 
+  fill(200,30,175);
+  ellipse(posX,posY,60,60);
+  
+  fill(0,0,0);
+  rect(posX2,posY2,180,30);
+  
+  //fill(0,0,255);
+  //rect(400,300,40,40);
+  
+  /*if(posX == 800){
+  posX = 0;
+  }
+  if(posY == 600){
+    posY = 0;
+  }*/
+  
+  if(mouseIsPressed == true){
+    velX = 18;
+    velY = 17;
+  }
+  else{
+    velX = 10;
+    velY = 9;
+  }
+  
+ if(posX >= borX || posX <= 30 ){
+   dirX = dirX * -1; 
+ }
+/* if(posX >= posX2 && posY <= posY2 ){
+   dirX = dirX * -1; 
+ }*/
+  if(posY >= borY || posY <= 30 ){
+   dirY = dirY * -1;
+ }/*
+ if(posY >= posY2 && posY <= posY2 ){
+   dirY = dirY * -1; 
+ }*/
+  
+  if(distance <= 180 && posY + 30 >= posY2){
+   dirY = dirY * -1; 
+  }
+  
+  posX = posX + dirX * velX;
+  posY = posY + dirY * velY;
+ 
+ if(keyIsPressed === true){
+ if(key.toLowerCase() == 'd'){
+  posX2 = posX2 + 5;}
+ if(key.toLowerCase() == 'a'){
+  posX2 = posX2 - 5;}
+ }
+   text(d, 100,200);
+  //textSize(40);
+  //text(posX,400,200);
+  //text(posY,400,250);
+}

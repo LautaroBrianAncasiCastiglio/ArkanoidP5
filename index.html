@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PLEASE NO CHANGES BELOW THIS LINE (UNTIL I SAY SO) -->
+  <script language="javascript" type="text/javascript" src="libraries/p5.min.js"></script>
+  <script language="javascript" type="text/javascript" src="Clase2Balls.js"></script>
+  <!-- OK, YOU CAN MAKE CHANGES BELOW THIS LINE AGAIN -->
+
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+  <!--var posX = 100;  var posY = 100;
+var velX = 10;   var velY = 10;
+var dirX = 1;    var dirY = 1;
+var radio = 10;
+
+var posX2 = 300; var posY2 = 550;
+let x = 0;
+
+var borX = 800 - radio;  var borY = 600 - radio;
+
+let izq = false; let der = false;
+
+function setup(){
+ createCanvas(800,600); 
+ time = millis();
+}
+
+function draw(){
+  background(125,125,125);
+  plano();
+  let distance = dist(posX,posX,x,x);
+  d = floor(distance);
+ //bolita
+  fill(0,250,0);
+  ellipse(posX,posY,radio *2);
+  //plataforma
+  fill(255,0,0);
+  rect(posX2,posY2,200/*180 sumarle 20*/,30);
+  
+  if(mouseIsPressed == true){velX = 10; velY = 10;}
+  else{velX = 7; velY = 7;}
+  
+ //rebotar con las paredes 
+ if(posX >= borX || posX <= radio ){dirX = dirX * -1;}
+ if(posY >= borY || posY <= radio ){dirY = dirY * -1;}
+ //barra detenerse
+ 
+ //rebotar con la plataforma
+ if(distance <= 180 && posY + radio >= posY2){dirY = dirY * -1;}
+  
+  x = posX2 + 90;
+  posX = posX + dirX * velX;
+  posY = posY + dirY * velY;
+ 
+ if(izq==true){posX2 = posX2 - 5;}
+ if(der==true){posX2 = posX2 + 5;}
+   
+   //text(d, 100,200);
+}
+
+function keyPressed(){
+  if(key == "a"){
+    izq = true;
+  }
+
+  if(key == "d"){
+    der = true;
+  }
+}
+ 
+function keyReleased(){
+    if(key == "a"){
+      izq= false;
+    }
+ 
+    if(key == "d"){
+      der = false;
+    }
+  }
+  -->
+<body>
+</body>
+</html>
