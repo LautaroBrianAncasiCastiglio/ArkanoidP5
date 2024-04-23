@@ -1,13 +1,17 @@
 //clase 2
 
 var bloks = [
-  [' ', '1', '1','1', ' ','1', ' '],
-  ['1', ' ', '1',' ', '1',' ', '1'],
-  [' ', '1', ' ','1', ' ','1', ' ']
+  [' ', '1', '1','1', ' ','1', ' ','1', ' ','1', ' ','1', ' ', '1'],
+  ['1', ' ', '1',' ', '1',' ', '1',' ', '1',' ', '1',' ', '1',' '],
+  [' ', '1', ' ','1', ' ','1', ' ','1', ' ','1', ' ','1', ' ', '1'],
+  ['1', ' ', '1',' ', '1',' ', '1',' ', '1',' ', '1',' ', '1',' '],
+  [' ', '1', ' ','1', ' ','1', ' ','1', ' ','1', ' ','1', ' ', '1'],
+  ['1', ' ', '1',' ', '1',' ', '1',' ', '1',' ', '1',' ', '1',' '],
+  [' ', '1', ' ','1', ' ','1', ' ','1', ' ','1', ' ','1', ' ', '1']
 ];
-let fila = 100;
+let fila = 50;
 let columna = 50;
-let bTam = 100;
+let bTam = 50;
 let blok = [];
 let distanX = [];
 let distanY = [];
@@ -28,6 +32,8 @@ var borY = 600 - radio;
 
 let izq = false;
 let der = false;
+
+let contador = 0;
 
 function setup() {
   createCanvas(800, 600);
@@ -55,31 +61,49 @@ function draw() {
 
   //rebotar con la plataforma
   if( posY + radio >= posY2){
-  if (posX >= posX2 && posX <= posX2 + tam ) {dirY = dirY * -1;}
+  if (posX >= posX2  && posX <= posX2 + tam  ) {dirY = dirY * -1;}
+  if (posX >= posX2 + tam  && posX <= posX2 + tam+5 ) {dirX = dirX * -1;}
+  if (posX >= posX2 -5 && posX <= posX2  ) {dirX = dirX * -1;}
   }
   
   posX = posX + dirX * velX;
   posY = posY + dirY * velY;
 
-  if (izq==true) {posX2 = posX2 - 5;}
-  if (der==true) {posX2 = posX2 + 5;}
+  if (izq==true) {posX2 = posX2 - 7;}
+  if (der==true) {posX2 = posX2 + 7;}
 
   for (let i = 0; i < blok.length; i++) {
       blok[i].show();
     //text(distanX[i], 350, 200);
     //text(distanY[i], 400, 200);
       if(posY + radio >= distanY[i] && posY + radio <= distanY[i] +50 ){
-        if (posX >= distanX[i] && posX <= distanX[i] + bTam ) {
-          distanX.splice(i,1);/*asignamos el valor X a una variable*/
-          distanY.splice(i,1);/*asignamos el valor Y a una variable*/
+        if (posX >= distanX[i] +2 && posX <= distanX[i] + bTam -2) {
+          distanX.splice(i,1);
+          distanY.splice(i,1);
           blok.splice(i,1);  
           dirY = dirY * -1;
+          contador = contador + 1;
+          }
+        if (posX >= distanX[i] + bTam - 2 && posX <= distanX[i] + bTam ) {
+          distanX.splice(i,1);
+          distanY.splice(i,1);
+          blok.splice(i,1);  
+          dirX = dirX * -1;
+          contador = contador + 1;
+          }
+        if (posX >= distanX[i] && posX <= distanX[i] + 2 ) {
+          distanX.splice(i,1);
+          distanY.splice(i,1);
+          blok.splice(i,1);  
+          dirX = dirX * -1;
+          contador = contador + 1;
           }
         } 
   }
     //text(distanX[1], 100, 200);
     //text(distanY[1], 200, 200);
-
+    textSize(40);
+    text(contador,100,40);
 }
 
 function keyPressed() {
@@ -93,8 +117,8 @@ function keyReleased() {
 }
 
 function plano() {
-  for (let c = 0; c < 3; c++) {
-    for (let f = 0; f < 6; f++) {
+  for (let c = 0; c < bloks.length; c++) {
+    for (let f = 0; f < bloks[1].length; f++) {
       var lad = bloks[c][f];
       if (lad == '1') {
         let b = new Bloques(fila, columna);
@@ -105,7 +129,7 @@ function plano() {
       }
       fila = fila + bTam;
     }
-    fila = 100;
+    fila = 50;
     columna = columna + 25;
   }
   columna = 50;
